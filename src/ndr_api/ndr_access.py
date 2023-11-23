@@ -125,7 +125,7 @@ class NDRrequests:
     ) -> Union[Dict[str, Any], None]:
         if headers is None:
             headers = self.headers
-        response = self.session.get(url, headers=headers)
+        response = self.session.get(url, headers=headers, proxies=self.proxies)
         if response.status_code == 200:
             result = response.json()
             return result
