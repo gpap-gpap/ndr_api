@@ -72,12 +72,16 @@ class NDRrequests:
         if proxies is not None:
             self.proxies = proxies
         self.session = requests.Session()
-        self.response = self.session.post(
-            NDRrequests.token_request,
-            data=NDRrequests.data,
-            headers={"Content-Type": "application/x-www-form-urlencoded"},
-            proxies=self.proxies,
-        )
+        try:
+            self.response = self.session.post(
+                NDRrequests.token_request,
+                data=NDRrequests.data,
+                headers={"Content-Type": "application/x-www-form-urlencoded"},
+                proxies=self.proxies,
+            )
+        except requests.exceptions.ConnectionError:
+            print("ConnectionError: check your internet connection")
+            self.response = None
         if self.response.status_code == 200:  # successfully got access token
             self._access_token = self.response.json()["access_token"]
             print("access token was retrieved successfully")
