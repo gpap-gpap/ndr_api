@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "ndr_api"
+version = "0.1.0"
+description = ""
+authors = ["giorgos papageorgiou <gpap.gpap@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "ndr_api", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+numpy = "^1.26.2"
+pandas = "^2.1.3"
+lasio = "^0.31"
+beautifulsoup4 = "^4.12.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
