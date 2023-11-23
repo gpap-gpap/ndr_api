@@ -69,15 +69,14 @@ class NDRrequests:
                 for key2, value2 in value.items():
                     assert value2 is not None, f"expected {key2} to be set"
         print("API keys successfully read")
-        if proxies is None:
-            self.session = requests.Session()
-        else:
-            self.session = requests.Session()
-            self.session.proxies.update(proxies)
+        if proxies is not None:
+            self.proxies = proxies
+        self.session = requests.Session()
         self.response = self.session.post(
             NDRrequests.token_request,
             data=NDRrequests.data,
             headers={"Content-Type": "application/x-www-form-urlencoded"},
+            proxies=self.proxies,
         )
         if self.response.status_code == 200:  # successfully got access token
             self._access_token = self.response.json()["access_token"]
